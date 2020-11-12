@@ -1,0 +1,113 @@
+<!--index.wxml-->
+
+<!--pages/signal/signal.wxml-->
+<!--列表页-->
+<view class='wrapper'>
+  <view class="userinfo-container">
+    <view class="userinfo">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信授权查看订阅有效期
+      </button>
+      <block wx:else>
+        <view class="has-userinfo">
+          <image class="userinfo-avatar {{}}" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+          <view class="userinfo-detail">
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+            <text class="userinfo-valid-date">订阅有效期：{{valid_date}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!--等待框-->
+  <loading hidden='{{!loading}}'>加载中...</loading>
+  <!--数据更新时间-->
+  <view class='top-header'>
+    <text class='update-time'>{{update_time}} 更新</text>
+  </view>
+  <!--列表-->
+  <view class='bind-table'>
+    <scroll-view scroll-x='true' class='scrollclass1'>
+      <view class='table table1'>
+        <view class="tr thead">
+          <view class="td df-qd">强度</view>
+          <view class="td df-tl">体量</view>
+          <view class="td df-tude">概念板块</view>
+          <view class="td df-sjltp">实际流通</view>
+          <view class="td df-zjje">上榜净额</view>
+          <view class="td df-buy">上榜买入</view>
+          <view class="td df-sell">上榜卖出</view>
+          <view class="td df-rate">上榜涨幅</view>
+          <view class="td df-zx-zlje">主力净额
+            <view class="df-br">（实时）</view>
+          </view>
+          <view class="td df-zx-buy">主力买入
+            <view class="df-br">（实时）</view>
+          </view>
+          <view class="td df-zx-sell">主力卖出
+            <view class="df-br">（实时）</view>
+          </view>
+        </view>
+        <view hidden='{{has_msg}}'>
+          <block wx:for="{{list}}" wx:key="RN">
+            <view class="tr tbody bg-g" wx:if="{{index % 2 == 0}}">
+              <view class="td df-qd">{{item.QD}}</view>
+              <view class="td df-tl">{{item.TL}}</view>
+              <view class="td df-tude">{{item.TUDE}}</view>
+              <view class="td df-sjltp">{{item.SJLTP}}</view>
+              <view class="td df-zjje">{{item.ZLJE}}</view>
+              <view class="td df-buy up-color ">{{item.BUY}}</view>
+              <view class="td df-sell down-color">{{item.SELL}}</view>
+              <view class="td df-rate up-color">{{item.RATE}}</view>
+              <view class="td df-zx-zlje">{{item.ZX_ZLJE}}</view>
+              <view class="td df-zx-buy up-color">{{item.ZX_BUY}}</view>
+              <view class="td df-zx-sell down-color ">{{item.ZX_SELL}}</view>
+            </view>
+            <view class="tr tbody bg-w" wx:else>
+              <view class="td df-qd">{{item.QD}}</view>
+              <view class="td df-tl">{{item.TL}}</view>
+              <view class="td df-tude">{{item.TUDE}}</view>
+              <view class="td df-sjltp">{{item.SJLTP}}</view>
+              <view class="td df-zjje">{{item.ZLJE}}</view>
+              <view class="td df-buy up-color ">{{item.BUY}}</view>
+              <view class="td df-sell down-color">{{item.SELL}}</view>
+              <view class="td df-rate up-color">{{item.RATE}}</view>
+              <view class="td df-zx-zlje">{{item.ZX_ZLJE}}</view>
+              <view class="td df-zx-buy up-color">{{item.ZX_BUY}}</view>
+              <view class="td df-zx-sell down-color ">{{item.ZX_SELL}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='div2'>
+      <view class="table table2">
+        <view class="tr thead">
+          <view class="td df-rn">No</view>
+          <view class="td df-sbsj">上榜时间</view>
+          <view class="td df-name">名称</view>
+        </view>
+        <view hidden='{{has_msg}}'>
+          <block wx:for="{{list}}" wx:key="RN">
+            <view class="tr tbody bg-g" wx:if="{{index % 2 == 0}}">
+              <view class="td df-rn">{{item.RN}}</view>
+              <view class="td df-sbsj">{{item.SBSJ}}</view>
+              <view class="td df-name">{{item.NAME}}
+                <view class="df-code">{{item.CODE}}</view>
+              </view>
+            </view>
+            <view class="tr tbody bg-w" wx:else>
+              <view class="td df-rn">{{item.RN}}</view>
+              <view class="td df-sbsj">{{item.SBSJ}}</view>
+              <view class="td df-name">{{item.NAME}}
+                <view class="df-code">{{item.CODE}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="clear-up"></view>
+    <!--message place holder-->
+    <view class='no-data-place-holder' hidden='{{!has_msg}}'>{{msg}}</view>
+  </view>
+</view>
